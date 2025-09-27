@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\Validator;
 
 /**
  * @OA\Info(
- *   title="API Eventos Clínica CEMEDSSO",
- *   version="1.0.0",
- *   description="Documentación OpenAPI (Swagger) Eventos Clínica (Proyecto Integrador) CEMEDSSO",
+ *   swagger: "2.0"
+ *   info: {
+ *       "title": "API Eventos Clínica CEMEDSSO",
+ *       "version": "1.0.0",
+ *       "description": "Documentación OpenAPI (Swagger) Eventos Clínica (Proyecto Integrador) CEMEDSSO"
+ *   }
  * )
  */
 class EventController extends Controller
