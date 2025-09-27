@@ -1,0 +1,424 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Eventos Clínica CEMEDSSO",
+        "description": "Documentación OpenAPI (Swagger) Eventos Clínica (Proyecto Integrador) CEMEDSSO",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/eventos/getall": {
+            "get": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Obtener todos las citas médicas",
+                "description": "Recupera una lista de todos las citas médicas.",
+                "operationId": "operationIdHere",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "propertyName": {
+                                            "description": "Description of the property",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/eventos/getdata/{id}": {
+            "get": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Obtener una cita médica por ID",
+                "description": "Recupera los detalles de una cita médica específica utilizando su ID.",
+                "operationId": "getEventById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la cita médica",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Indica si la solicitud fue exitosa",
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "description": "Mensaje descriptivo",
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Event"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Evento no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/eventos/savedata": {
+            "post": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Guardar un nuevo evento",
+                "description": "Crea un nuevo evento en el sistema.",
+                "operationId": "storeEvent",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Título del evento",
+                                        "type": "string"
+                                    },
+                                    "start": {
+                                        "description": "Fecha y hora de inicio del evento",
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "end": {
+                                        "description": "Fecha y hora de fin del evento",
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "color": {
+                                        "description": "Color del evento",
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "description": "ID del usuario",
+                                        "type": "integer"
+                                    },
+                                    "doctor_id": {
+                                        "description": "ID del doctor",
+                                        "type": "integer"
+                                    },
+                                    "consultorio_id": {
+                                        "description": "ID del consultorio",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Evento creado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Indica si la solicitud fue exitosa",
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "description": "Mensaje descriptivo",
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID del evento creado",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/eventos/updatedata/{id}": {
+            "put": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Actualizar un evento existente",
+                "description": "Actualiza los detalles de un evento existente utilizando su ID.",
+                "operationId": "updateEvent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del evento a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Título del evento",
+                                        "type": "string"
+                                    },
+                                    "start": {
+                                        "description": "Fecha y hora de inicio del evento",
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "end": {
+                                        "description": "Fecha y hora de fin del evento",
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "color": {
+                                        "description": "Color del evento",
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "description": "ID del usuario",
+                                        "type": "integer"
+                                    },
+                                    "doctor_id": {
+                                        "description": "ID del doctor",
+                                        "type": "integer"
+                                    },
+                                    "consultorio_id": {
+                                        "description": "ID del consultorio",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Evento actualizado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Indica si la solicitud fue exitosa",
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "description": "Mensaje descriptivo",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/eventos/deletedata/{id}": {
+            "delete": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Eliminar un evento existente",
+                "description": "Elimina un evento existente utilizando su ID.",
+                "operationId": "deleteEvent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del evento a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento eliminado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Indica si la solicitud fue exitosa",
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "description": "Mensaje descriptivo",
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID del evento eliminado",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Evento no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/eventos/updatestate/{id}": {
+            "put": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Actualizar el estado de un evento existente",
+                "description": "Actualiza el estado de un evento existente utilizando su ID.",
+                "operationId": "updateEventState",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del evento a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estado del evento actualizado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Indica si la solicitud fue exitosa",
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "description": "Mensaje descriptivo",
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID del evento actualizado",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Evento no encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Event": {
+                "title": "Event",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Event Title"
+                    },
+                    "start": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01T10:00:00Z"
+                    },
+                    "end": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01T12:00:00Z"
+                    },
+                    "color": {
+                        "type": "string",
+                        "example": "#ff0000"
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "doctor_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "consultorio_id": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Eventos",
+            "description": "Eventos"
+        }
+    ]
+}
